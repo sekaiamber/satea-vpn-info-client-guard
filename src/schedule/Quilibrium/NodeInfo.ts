@@ -8,7 +8,7 @@ import getUtils from '../../utils/sateavpn'
 export default class QuilibriumNodeInfoTask extends BaseTask<QuilibriumNodeInfotData> {
   public readonly namespace = 'quil_node_info'
   // public readonly cronExpression = '*/5 * * * * *'
-  public readonly cronExpression = '0 * * * * *'
+  public readonly cronExpression = '*/5 * * * * *'
   public readonly timeout = timeNumber.second * 30
 
   protected async parseResult(
@@ -35,12 +35,9 @@ export default class QuilibriumNodeInfoTask extends BaseTask<QuilibriumNodeInfot
   }
 
   protected async onProcess(): Promise<QuilibriumNodeInfotData | null> {
-    console.log('start getQuilibriumNodeInfo')
     const client = await QuilibriumService.getQuilibriumClient()
-    console.log('1', client)
     if (!client) return null
     const info = await QuilibriumService.getQuilibriumNodeInfo(client)
-    console.log('2', info)
     return info
   }
 }
