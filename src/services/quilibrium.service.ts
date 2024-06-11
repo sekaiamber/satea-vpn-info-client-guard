@@ -4,7 +4,7 @@ import {
   KuzcoAPIWorkerListData,
 } from '@satea/vpn-info-monitor-utils/lib/kuzco'
 import getUtils from '../utils/sateavpn'
-import axios from 'axios'
+import { QuilibriumNodeInfotData } from '@satea/vpn-info-monitor-utils/lib/quilibrium'
 
 const namespace = 'quilibrium_service'
 
@@ -52,8 +52,22 @@ export async function getQuilibriumClient(): Promise<QuilibriumPM2Client | null>
   return null
 }
 
+export async function getQuilibriumNodeInfo(
+  client: QuilibriumPM2Client
+): Promise<QuilibriumNodeInfotData> {
+  // cd ~/ceremonyclient/node && ~/ceremonyclient/node/node-1.4.19-darwin-arm64 -node-info
+  const cmd = `cd ${client.pmCwd} && ${client.pmExecPath} -node-info`
+  const utils = getUtils()
+  const result = await utils.shellScripts.scriptRunner.exec(cmd)
+  if (!result.success) {
+    throw new Error('get node info failed: run cmd failed')
+  }
+  console.log(result)
+}
+
 const QuilibriumService = {
   getQuilibriumClient,
+  getQuilibriumNodeInfo,
 }
 
 export default QuilibriumService
