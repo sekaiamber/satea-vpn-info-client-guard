@@ -14,7 +14,7 @@
     "upload_server": "http-server ./upload",
     "script": "npm run babel && node -r dotenv/config ",
     "script_no_build": "node -r dotenv/config ",
-    "pm2_start": "pm2 start --name sateavims_server npm -- run start"
+    "pm2_start": "pm2 start --name sateavims_client_guard npm -- run start"
   },
   "dependencies": {
     "@cmdcode/buff-utils": "^2.0.0",
