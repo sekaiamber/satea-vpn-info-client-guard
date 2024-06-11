@@ -52,6 +52,13 @@ export async function getQuilibriumClient(): Promise<QuilibriumPM2Client | null>
   return null
 }
 
+function camelize(text: string): string {
+  const a = text
+    .toLowerCase()
+    .replace(/[-_\s.]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ''))
+  return a.substring(0, 1).toLowerCase() + a.substring(1)
+}
+
 export async function getQuilibriumNodeInfo(
   client: QuilibriumPM2Client
 ): Promise<QuilibriumNodeInfotData> {
@@ -62,7 +69,15 @@ export async function getQuilibriumNodeInfo(
   if (!result.success) {
     throw new Error('get node info failed: run cmd failed')
   }
-  console.log(result)
+  const stdout = result.stdout.trim()
+  // parse rows
+  const rows = stdout.split('\n').filter((r) => r.includes(':'))
+  const ret: QuilibriumNodeInfotData = {}
+  rows.forEach((r) => {
+    const [key, ...value] = r.split(':')
+    ret[camelize(key)] = value.join(':').trim()
+  })
+  return ret
 }
 
 const QuilibriumService = {
