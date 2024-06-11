@@ -7,8 +7,7 @@ import getUtils from '../../utils/sateavpn'
 
 export default class QuilibriumNodeInfoTask extends BaseTask<QuilibriumNodeInfotData> {
   public readonly namespace = 'quil_node_info'
-  // public readonly cronExpression = '*/5 * * * * *'
-  public readonly cronExpression = '*/5 * * * * *'
+  public readonly cronExpression = '*/5 * * * *'
   public readonly timeout = timeNumber.second * 30
 
   protected async parseResult(
