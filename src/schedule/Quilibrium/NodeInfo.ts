@@ -1,12 +1,13 @@
 import { timeNumber } from '../../utils/time'
 import BaseTask, { TaskRunningStatus } from '../BaseTask'
-import KuzcoService from '../../services/kuzco.service'
+import QuilibriumService from '../../services/quilibrium.service'
 import { QuilibriumNodeInfotData } from '@satea/vpn-info-monitor-utils/lib/quilibrium'
 import { ReportRequestData } from '@satea/vpn-info-monitor-utils/lib/Manager'
 import getUtils from '../../utils/sateavpn'
 
 export default class QuilibriumNodeInfoTask extends BaseTask<QuilibriumNodeInfotData> {
-  public readonly namespace = 'kuzco_worker_list'
+  public readonly namespace = 'quil_node_info'
+  // public readonly cronExpression = '*/5 * * * * *'
   public readonly cronExpression = '0 * * * * *'
   public readonly timeout = timeNumber.second * 30
 
@@ -33,14 +34,10 @@ export default class QuilibriumNodeInfoTask extends BaseTask<QuilibriumNodeInfot
     }
   }
 
-  private async shouldRun(): Promise<boolean> {
-    //
-  }
-
   protected async onProcess(): Promise<QuilibriumNodeInfotData | null> {
-    const jwt = await KuzcoService.readJWTToken()
-    if (!jwt) return null
-    const list = await KuzcoService.getWorkerList()
-    return list
+    const client = await QuilibriumService.getQuilibriumClient()
+    if (!client) return null
+    const info = await QuilibriumService.getQuilibriumNodeInfo(client)
+    return info
   }
 }
