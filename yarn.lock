@@ -1914,10 +1914,10 @@
   resolved "https://registry.yarnpkg.com/@sapphire/snowflake/-/snowflake-3.5.3.tgz#0c102aa2ec5b34f806e9bc8625fc6a5e1d0a0c6a"
   integrity sha512-jjmJywLAFoWeBi1W7994zZyiNWPIiqRRNAmSERxyg93xRGzNYvGjlZ0gR6x0F4gPRi2+0O6S71kOZYyr3cxaIQ==
 
-"@satea/vpn-info-monitor-utils@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@satea/vpn-info-monitor-utils/-/vpn-info-monitor-utils-0.0.11.tgz#0350b8cd04d544eaaa3e6e6dde8f8fb8869eb903"
-  integrity sha512-earb0iAWC115lOfRFkHulTtfAQd2NealYhMW9A0L00mGUWgDKCpn0ZiqJJa6f2/J4VQVu0qiCJs6/NvRxpiZmA==
+"@satea/vpn-info-monitor-utils@0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@satea/vpn-info-monitor-utils/-/vpn-info-monitor-utils-0.0.12.tgz#6aa4fc836efb780948ee842832802a168aa9e686"
+  integrity sha512-Kf/8dgrpKGC2ghwmw9IRDJ4/wuzpAZParNBHeIoFfSZ/zxa+DuC+AaNtSzfMPghnm2MmxbLXqaC1yrvmbt6eHA==
   dependencies:
     axios "^1.6.8"
 
