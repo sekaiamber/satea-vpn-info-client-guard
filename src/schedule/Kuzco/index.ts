@@ -1,3 +1,3 @@
-import KuzcoWorkerListTask from './WorkerList'
+import KuzcoClientInfoTask from './ClientInfo'
 
-export { KuzcoWorkerListTask }
+export { KuzcoClientInfoTask }

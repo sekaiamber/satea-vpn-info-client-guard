@@ -1,18 +1,17 @@
 import { timeNumber } from '../../utils/time'
-import BaseTask, { TaskRunningStatus } from '../BaseTask'
+import BaseTask, { ReportRequestRawData, TaskRunningStatus } from '../BaseTask'
 import KuzcoService from '../../services/kuzco.service'
-import { KuzcoAPIWorkerListData } from '@satea/vpn-info-monitor-utils/lib/kuzco'
-import { ReportRequestData } from '@satea/vpn-info-monitor-utils/lib/Manager'
+import { KuzcoAPIAllInOneData } from '@satea/vpn-info-monitor-utils/lib/kuzco'
 import getUtils from '../../utils/sateavpn'
 
-export default class KuzcoWorkerListTask extends BaseTask<KuzcoAPIWorkerListData> {
-  public readonly namespace = 'kuzco_worker_list'
+export default class KuzcoClientInfoTask extends BaseTask<KuzcoAPIAllInOneData> {
+  public readonly namespace = 'kuzco_client_info'
   public readonly cronExpression = '0 * * * * *'
   public readonly timeout = timeNumber.second * 30
 
   protected async parseResult(
-    status: TaskRunningStatus<KuzcoAPIWorkerListData>
-  ): Promise<ReportRequestData<KuzcoAPIWorkerListData>> {
+    status: TaskRunningStatus<KuzcoAPIAllInOneData>
+  ): Promise<ReportRequestRawData<KuzcoAPIAllInOneData>> {
     const satea = getUtils()
     const name = await satea.shellScripts.whoami()
     if (status.success) {
@@ -33,10 +32,10 @@ export default class KuzcoWorkerListTask extends BaseTask<KuzcoAPIWorkerListData
     }
   }
 
-  protected async onProcess(): Promise<KuzcoAPIWorkerListData | null> {
+  protected async onProcess(): Promise<KuzcoAPIAllInOneData | null> {
     const jwt = await KuzcoService.readJWTToken()
     if (!jwt) return null
-    const list = await KuzcoService.getWorkerList()
+    const list = await KuzcoService.getAllInOneData()
     return list
   }
 }

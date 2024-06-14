@@ -1,8 +1,7 @@
 import { timeNumber } from '../../utils/time'
-import BaseTask, { TaskRunningStatus } from '../BaseTask'
+import BaseTask, { ReportRequestRawData, TaskRunningStatus } from '../BaseTask'
 import QuilibriumService from '../../services/quilibrium.service'
 import { QuilibriumNodeInfotData } from '@satea/vpn-info-monitor-utils/lib/quilibrium'
-import { ReportRequestData } from '@satea/vpn-info-monitor-utils/lib/Manager'
 import getUtils from '../../utils/sateavpn'
 
 export default class QuilibriumNodeInfoTask extends BaseTask<QuilibriumNodeInfotData> {
@@ -12,7 +11,7 @@ export default class QuilibriumNodeInfoTask extends BaseTask<QuilibriumNodeInfot
 
   protected async parseResult(
     status: TaskRunningStatus<QuilibriumNodeInfotData>
-  ): Promise<ReportRequestData<QuilibriumNodeInfotData>> {
+  ): Promise<ReportRequestRawData<QuilibriumNodeInfotData>> {
     const satea = getUtils()
     const name = await satea.shellScripts.whoami()
     if (status.success) {

@@ -12,6 +12,8 @@ export interface TaskRunningStatus<T> {
   taskId: string
 }
 
+export type ReportRequestRawData<T> = Omit<ReportRequestData<T>, 'clientUUID'>
+
 export default class BaseTask<T = any> {
   public readonly namespace!: string
   public readonly cronExpression!: string
@@ -76,14 +78,14 @@ export default class BaseTask<T = any> {
 
   protected async parseResult(
     status: TaskRunningStatus<T>
-  ): Promise<ReportRequestData<T>> {
+  ): Promise<ReportRequestRawData<T>> {
     throw new Error('not implemented')
   }
 
-  protected async onReport(data: ReportRequestData<T>): Promise<void> {
+  protected async onReport(data: ReportRequestRawData<T>): Promise<void> {
     const satea = getUtils()
     try {
-      await satea.manager.clientReport(data)
+      await satea.manager.clientReport(data as any)
     } catch (error) {
       console.error(error)
     }
