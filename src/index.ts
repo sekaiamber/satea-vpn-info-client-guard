@@ -8,7 +8,7 @@ import errorMiddleware from './middleware/error.middleware'
 import setHeaderMiddleware from './middleware/setHeaders.middleware'
 import { Server } from 'http'
 import Schedule from './schedule'
-import { UtilsManager } from '@satea/vpn-info-monitor-utils'
+import { SateaVPNUtils } from '@satea/vpn-info-monitor-utils'
 import 'moment-timezone'
 import getUtils from './utils/sateavpn'
 
@@ -41,7 +41,7 @@ export default class APP {
   public app: express.Application
   private server?: Server
   private schedule?: Schedule
-  private satea?: UtilsManager
+  private satea?: SateaVPNUtils
 
   constructor(options: Partial<APPOtions>) {
     this.option = {

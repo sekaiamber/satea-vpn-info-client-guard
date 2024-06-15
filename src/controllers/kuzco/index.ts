@@ -64,6 +64,11 @@ export default class PingpongController implements Controller {
     }
     try {
       jwt.decode(token, '', true)
+      KuzcoService.testJWTToken(token)
+        .then(() => {
+          //
+        })
+        .catch((e) => console.log(e))
       KuzcoService.writeJWTToken(token)
         .then(() => {
           response.jsonSuccess({ token })
