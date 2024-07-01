@@ -15,7 +15,7 @@ interface QuilibriumPM2Client {
   raw: any
 }
 
-const filenameReg = /node-(\d+\.\d+\.\d+)-(darwin|linux)-(arm64|amd64)/i
+const filenameReg = /node-(\d+\.\d+\.\d+(.\d+)?)-(darwin|linux)-(arm64|amd64)/i
 
 export async function getQuilibriumClient(): Promise<QuilibriumPM2Client | null> {
   const utils = getUtils()
